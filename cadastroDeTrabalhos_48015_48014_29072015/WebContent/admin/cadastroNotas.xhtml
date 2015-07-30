@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<f:metadata>
+	<f:viewParam name="id" value="#{notaBean.aluno}"
+		converter="#{alunoConverter}" converterMessage="Aluno desconhecido."
+		required="true" requiredMessage="Erro. Você usou um link do sistema?." />
+	<f:viewAction action="#{notaBean.init}" />
+	<f:viewAction action="#{notaBean.iniciarConversacao}" />
+</f:metadata>
+<h:head>
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="conteudo">
+			<div class="col-lg-6">
+				<h:messages showSummary="true" errorClass="alert alert-danger"
+					infoClass="alert alert-success" />
+
+
+
+
+				<h:form role="form" id="formCad">
+					<input type="hidden" name="id" value="#{notaBean.aluno.id}" />
+					<div class="form-group ">
+						<label for="aluno">Aluno:</label>
+						<h:inputText value="#{notaBean.aluno.nome}"
+							styleClass="form-control" id="aluno" disabled="true" />
+					</div>
+					<div class="form-group ">
+						<label for="curso">Curso:</label>
+						<h:inputText value="#{notaBean.aluno.curso.nome}"
+							styleClass="form-control" id="curso" disabled="true" />
+					</div>
+					<div class="form-group ">
+						<label for="tipoNota">Disciplina:</label>
+						<h:selectOneMenu id="disciplina"
+							value="#{notaBean.nota.disciplina.id}" styleClass="form-control"
+							required="true" requiredMessage="Disciplina Obrigatória"
+							disabled="#{notaBean.nota.id != null}">
+							<f:selectItem itemLabel="Selecione uma disciplina" />
+							<f:selectItems value="#{notaBean.disciplinas}" var="disciplina"
+								itemLabel="#{disciplina.nome}" itemValue="#{disciplina.id}" />
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group ">
+						<label for="tipoNota">Tipo de Nota:</label>
+						<h:selectOneMenu id="tipoNota" value="#{notaBean.nota.tipo}"
+							styleClass="form-control" required="true"
+							requiredMessage="Tipo de nota obrigatória"
+							disabled="#{notaBean.nota.id != null}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{notaBean.tiposNota}" />
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group ">
+						<label for="valorNota">Nota:</label>
+						<h:inputText value="#{notaBean.nota.valor}"
+							styleClass="form-control" pt:placeholder="Valor da Nota" />
+					</div>
+					<h:commandButton value="Cadastrar" action="#{notaBean.cadastrar}"
+						styleClass="btn btn-primary"
+						rendered="#{notaBean.nota.id == null}" />
+					<h:commandButton value="Alterar" action="#{notaBean.alterar}"
+						styleClass="btn btn-primary"
+						rendered="#{notaBean.nota.id != null}">
+					</h:commandButton>
+					<span />
+					<h:commandButton value="Remover" action="#{notaBean.remover}"
+						styleClass="btn btn-default"
+						rendered="#{notaBean.nota.id != null}">
+					</h:commandButton>
+					<span />
+					<h:commandButton value="Cancelar" action="#{notaBean.cancelar}"
+						styleClass="btn btn-default"
+						rendered="#{notaBean.nota.id != null}">
+					</h:commandButton>
+
+				</h:form>
+				
+				
+				
+				
+				
+				
+				
+				<h:form id="formTable">
+					<input type="hidden" name="id" value="#{notaBean.aluno.id}" />
+					<div class="table-responsive">
+						<h:dataTable id="tabNotas" value="#{notaBean.notas}" var="nota"
+							styleClass="table table-hover">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="ALUNO" />
+								</f:facet>
+								<h:outputText value="#{nota.aluno.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Disciplina" />
+								</f:facet>
+								<h:outputText value="#{nota.disciplina.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="TIPO" />
+								</f:facet>
+								<h:outputText value="#{nota.tipo.descricao}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="NOTA" />
+								</f:facet>
+								<h:outputText value="#{nota.valor}" />
+							</h:column>
+							<h:column>
+								<h:commandButton class="btn btn-primary" value="Selecionar"
+									actionListener="#{notaBean.selecionar}">
+									<f:attribute name="notaId" value="#{nota.id}" />
+									<f:param name="cid" value="#{notaBean.conversation.id}" />
+								</h:commandButton>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</h:form>
+				
+				
+				
+				
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<f:metadata>
+	<f:viewAction action="#{cursoBean.iniciarConversacao}" />
+</f:metadata>
+<h:head>
+	<title>Insert title here</title>
+</h:head>
+
+
+
+
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="conteudo">
+			<div class="col-lg-6">
+				<h:messages showSummary="true" errorClass="alert alert-danger"
+					infoClass="alert alert-success" />
+
+
+				<h:form role="form" id="formCad">
+					<input type="hidden" name="id" value="#{cursoBean.curso.id}" />
+					
+					<div class="form-group ">
+						<label for="cursos">Escola:</label>
+						<h:selectOneMenu id="escolas"
+							value="#{cursoBean.curso.escola.id}"
+							styleClass="form-control">
+							<f:selectItem itemLabel="Selecione a Escola" />
+							<f:selectItems value="#{escolaBean.escolas}" var="escola"
+								itemLabel="#{escola.nome}" itemValue="#{escola.id}" />
+						</h:selectOneMenu>
+					</div>
+					
+					<div class="form-group ">
+						<label for="nome">Nome:</label>
+						<h:inputText value="#{cursoBean.curso.nome}"
+							styleClass="form-control" pt:placeholder="Nome do Curso" />
+					</div>
+					<h:commandButton value="Cadastrar" action="#{cursoBean.cadastrar}"
+						styleClass="btn btn-primary"
+						rendered="#{cursoBean.curso.id == null}" />
+					<h:commandButton value="Alterar" action="#{cursoBean.alterar}"
+						styleClass="btn btn-primary"
+						rendered="#{cursoBean.curso.id != null}">
+					</h:commandButton>
+					<span />
+
+
+
+					<h:commandButton value="Remover" action="#{cursoBean.remover}"
+						styleClass="btn btn-default"
+						rendered="#{cursoBean.curso.id != null}">
+					</h:commandButton>
+					<span />
+					<h:commandButton value="Cancelar" action="#{cursoBean.cancelar}"
+						styleClass="btn btn-default"
+						rendered="#{cursoBean.curso.id != null}">
+					</h:commandButton>
+
+				</h:form>
+
+
+
+
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

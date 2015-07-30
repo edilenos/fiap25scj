@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="conteudo">
+			<div class="col-lg-6">
+				<h:messages showSummary="true" errorClass="alert alert-danger"
+					infoClass="alert alert-success" />
+				<h:form role="form">
+					<div class="form-group">
+						<h:selectOneMenu id="cursos" value="#{cursoBean.curso.id}"
+							styleClass="form-control">
+							<f:selectItem itemLabel="Selecione o Curso" />
+							<f:selectItems value="#{cursoBean.cursos}" var="curso"
+								itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+							<f:ajax render="tabAlunos"
+								listener="#{cursoBean.alunosMatriculados}" />
+						</h:selectOneMenu>
+					</div>
+					<div class="table-responsive">
+						<h:dataTable id="tabAlunos" value="#{cursoBean.alunos}"
+							var="aluno" styleClass="table table-hover">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="NOME"
+										rendered="#{not empty cursoBean.alunos}" />
+								</f:facet>
+								<h:link value="#{aluno.nome}" outcome="cadastroNotas"
+									includeViewParams="true">
+									<f:param name="id" value="#{aluno.id}" />
+								</h:link>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

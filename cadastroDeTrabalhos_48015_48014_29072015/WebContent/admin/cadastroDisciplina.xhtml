@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="conteudo">
+			<div class="col-lg-6">
+				<h:messages showSummary="true" errorClass="alert alert-danger"
+					infoClass="alert alert-success" />
+				<h:form role="form">
+					<div class="form-group ">
+						<label for="cursos">Curso:</label>
+						<h:selectOneMenu id="cursos"
+							value="#{disciplinaBean.disciplina.curso.id}"
+							styleClass="form-control">
+							<f:selectItem itemLabel="Selecione o Curso" />
+							<f:selectItems value="#{cursoBean.cursos}" var="curso"
+								itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group ">
+						<label for="disciplina">Disciplina:</label>
+						<h:inputText value="#{disciplinaBean.disciplina.nome}"
+							styleClass="form-control" pt:placeholder="Nome da Disciplina" />
+					</div>
+					<h:commandButton value="Cadastrar"
+						action="#{disciplinaBean.cadastrar}" styleClass="btn btn-primary" />
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

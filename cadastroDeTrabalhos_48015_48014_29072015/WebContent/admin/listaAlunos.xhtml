@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="conteudo">
+			<div class="col-lg-6">
+				<div class="table-responsive">
+					<h:dataTable id="tabAlunos" value="#{alunoBean.alunos}" var="aluno"
+						styleClass="table table-hover" rowClasses="#{alunoBean.rowClass}" >
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="NOME" />
+							</f:facet>
+							<h:outputText value="#{aluno.nome}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="CURSO" />
+							</f:facet>
+							<h:outputText value="#{aluno.curso.nome}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="SITUACAO" />
+							</f:facet>
+							<h:outputText value="#{aluno.situacao}" />
+						</h:column>s
+					</h:dataTable>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
