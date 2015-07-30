@@ -3,6 +3,7 @@ package br.com.fiap.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -15,6 +16,7 @@ import br.com.fiap.dao.Dao;
 import br.com.fiap.dao.annotation.Transacional;
 import br.com.fiap.model.entity.Aluno;
 import br.com.fiap.model.entity.Curso;
+import br.com.fiap.model.entity.Escola;
 
 @Named(value = "cursoBean")
 @ConversationScoped
@@ -32,6 +34,13 @@ public class CursoBean implements Serializable {
 	
 	@Inject
 	private Conversation conversation;
+	
+	@PostConstruct
+	public void init() {
+		if (curso.getId() == null) {
+			curso.setEscola(new Escola());
+		}
+	}
 	
 	public Conversation getConversation() {
 		return conversation;
