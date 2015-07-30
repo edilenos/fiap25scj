@@ -1,3 +1,3 @@
 # README
 
-Esse Repositório de trabalhos de pós graduação da FIAP Java SOA
+Esse é um repositório para os trabalhos de pós graduação da FIAP Java SOA
