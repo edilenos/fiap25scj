@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -121,13 +120,13 @@ public class EscolaBean implements Serializable {
 	public void validar(Escola escola) throws Exception {
 
 		if (escola.getNome() == null || escola.getNome() == "")
-			throw new Exception("Escola não possui nome.");
+			throw new Exception("Escola nï¿½o possui nome.");
 
 		for (Escola escolas : getEscolas()) {
 			if (escolas.getNome().equals(escola.getNome())) {
 				if (!escolas.getId().equals(escola.getId())) {
 					throw new Exception(
-							"Já existe uma escola cadastrada com esse nome.");
+							"Jï¿½ existe uma escola cadastrada com esse nome.");
 				}
 			}
 		}

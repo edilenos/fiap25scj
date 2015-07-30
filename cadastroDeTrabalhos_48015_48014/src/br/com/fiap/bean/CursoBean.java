@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -16,8 +15,6 @@ import br.com.fiap.dao.Dao;
 import br.com.fiap.dao.annotation.Transacional;
 import br.com.fiap.model.entity.Aluno;
 import br.com.fiap.model.entity.Curso;
-import br.com.fiap.model.entity.Disciplina;
-import br.com.fiap.model.entity.Escola;
 
 @Named(value = "cursoBean")
 @ConversationScoped
@@ -90,7 +87,7 @@ public class CursoBean implements Serializable {
 		List<Curso> cursos = getCursos();
 
 		if (cursos != null && cursos.contains(curso)) {
-			throw new Exception("Já existe um curso cadastrado com esse nome.");
+			throw new Exception("Jï¿½ existe um curso cadastrado com esse nome.");
 		}
 	}
 	
